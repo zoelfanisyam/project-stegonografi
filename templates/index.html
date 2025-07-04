@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Projeect Steganografi Alpha + PIN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      function switchTab(tab) {
+        const embedBtn = document.getElementById("tab-embed");
+        const extractBtn = document.getElementById("tab-extract");
+
+        document.getElementById("embedForm").classList.add("hidden");
+        document.getElementById("extractForm").classList.add("hidden");
+
+        embedBtn.classList.remove("bg-gray-800", "text-white", "font-semibold");
+        embedBtn.classList.add("text-gray-400");
+        extractBtn.classList.remove(
+          "bg-gray-800",
+          "text-white",
+          "font-semibold"
+        );
+        extractBtn.classList.add("text-gray-400");
+
+        document.getElementById(tab + "Form").classList.remove("hidden");
+        const activeBtn = document.getElementById("tab-" + tab);
+        activeBtn.classList.remove("text-gray-400");
+        activeBtn.classList.add("bg-gray-800", "text-white", "font-semibold");
+      }
+
+      window.onload = () => {
+        switchTab("embed");
+      };
+    </script>
+  </head>
+  <body class="bg-gray-900 min-h-screen p-6 text-gray-100">
+    <div
+      class="bg-gray-800 p-6 rounded-xl shadow-2xl w-full max-w-2xl mx-auto border border-gray-700"
+    >
+      <h1 class="text-3xl font-bold text-center text-blue-400 mb-6">
+        🔐 <br />
+        Steganografi Alpha + PIN
+      </h1>
+
+      <div class="flex justify-center mb-6 space-x-4">
+        <button
+          id="tab-embed"
+          onclick="switchTab('embed')"
+          class="px-6 py-2 rounded-lg border border-gray-600 transition-colors duration-200"
+        >
+          Sisipkan
+        </button>
+        <button
+          id="tab-extract"
+          onclick="switchTab('extract')"
+          class="px-6 py-2 rounded-lg border border-gray-600 transition-colors duration-200"
+        >
+          Ekstrak
+        </button>
+      </div>
+
+      <!-- Form Embed -->
+      <form
+        id="embedForm"
+        method="POST"
+        enctype="multipart/form-data"
+        class="space-y-4 hidden"
+      >
+        <input type="hidden" name="operation" value="embed" />
+        <div>
+          <label class="block text-gray-300 mb-1">Upload Gambar</label>
+          <input
+            type="file"
+            name="image"
+            required
+            class="w-full bg-gray-700 border border-gray-600 rounded p-2 text-gray-100"
+          />
+        </div>
+        <div>
+          <label class="block text-gray-300 mb-1">PIN (Wajib)</label>
+          <input
+            type="password"
+            name="pin"
+            required
+            class="w-full bg-gray-700 border border-gray-600 rounded p-2 text-gray-100"
+          />
+        </div>
+        <div>
+          <label class="block text-gray-300 mb-1">Pesan Rahasia</label>
+          <input
+            type="text"
+            name="message"
+            required
+            class="w-full bg-gray-700 border border-gray-600 rounded p-2 text-gray-100"
+          />
+        </div>
+        <div class="text-center">
+          <button
+            type="submit"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded shadow-lg transition duration-200"
+          >
+            🔒 Sisipkan Pesan
+          </button>
+        </div>
+      </form>
+
+      <!-- Form Ekstrak -->
+      <form
+        id="extractForm"
+        method="POST"
+        enctype="multipart/form-data"
+        class="space-y-4 hidden"
+      >
+        <input type="hidden" name="operation" value="extract" />
+        <div>
+          <label class="block text-gray-300 mb-1">Upload Gambar Stego</label>
+          <input
+            type="file"
+            name="image"
+            required
+            class="w-full bg-gray-700 border border-gray-600 rounded p-2 text-gray-100"
+          />
+        </div>
+        <div>
+          <label class="block text-gray-300 mb-1">PIN (Wajib)</label>
+          <input
+            type="password"
+            name="pin"
+            required
+            class="w-full bg-gray-700 border border-gray-600 rounded p-2 text-gray-100"
+          />
+        </div>
+        <div class="text-center">
+          <button
+            type="submit"
+            class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded shadow-lg transition duration-200"
+          >
+            🔓 Ekstrak Pesan
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
